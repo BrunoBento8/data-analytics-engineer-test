@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: test_analytics_engineer.db
+    schema: public
+    tables:
+      - name: Country
+        identifier: Country
+      
+      - name: League
+        identifier: League
+
+      - name: Match
+        identifier: Match
+
+      - name: Player
+        identifier: Player
+
+      - name: Player_Attributes
+        identifier: Player_Attributes
+        
+      - name: Team
+        identifier: Team
+
+      - name: Team_Attributes
+        identifier: Team_Attributes

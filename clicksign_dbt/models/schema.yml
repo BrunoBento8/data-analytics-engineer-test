@@ -1,0 +1,71 @@
+version: 2
+
+models:
+
+  - name: dim_country_league # table
+    description: Tabela com os países e ligas
+    columns:
+
+      - name: league_name
+        description: Atributos originais da tabela
+        tests:
+          - accepted_values:
+              values: 
+                ['Belgium Jupiler League',
+                  'Brasileirão Série A',
+                  'England Premier League',
+                  'France Ligue 1',
+                  'Germany 1. Bundesliga',
+                  'Italy Serie A',
+                  'Liga da Angola',
+                  'Netherlands Eredivisie',
+                  'Poland Ekstraklasa',
+                  'Portugal Liga ZON Sagres',
+                  'Scotland Premier League',
+                  'Spain LIGA BBVA',
+                  'Switzerland Super League']
+      
+      - name: ID
+        description: ID do país
+        tests:
+          - unique
+          - not_null
+
+
+
+  - name: dim_team # table
+    description: Tabela com as informações mais atualizadas dos times
+    columns:
+
+      - name: team_api_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('fct_matches')
+              field: home_team_api_id 
+
+  - name: dim_player # table
+    description: Tabela com as informações mais atualizadas dos jogadores
+    columns:
+
+      - name: player_api_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('fct_matches')
+              field: home_player_1 
+
+
+  - name: fct_matches # table
+    description: Tabela fato das partidas
+    columns:
+
+      - name: id_match
+        description: Primary key da partida
+        tests:
+          - unique
+          - not_null
